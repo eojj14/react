@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classes from './Button.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { Badge } from 'reactstrap';
 
 const Button = (props) => {
 
@@ -20,6 +23,8 @@ const Button = (props) => {
         type = 'button'
       >
         {text}
+        <FontAwesomeIcon icon={faCoffee} />
+        <Badge color="secondary">New</Badge>
       </button>
     </a>
   )

@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import classes from './test.scss';
+import '../node_modules/bootstrap/dist/css/bootstrap.css'; //Loads global styles for bootstrap
 import Button from './components/Button';
+
 
 const App = () => {
   return [
-    <div className={classes.red}>Hello React!</div>,
-    <Button text='Google' href='http://www.google.com' />
+    <Button text='Google' href='http://www.google.com' />,
   ]
 };
 

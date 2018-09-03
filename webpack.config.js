@@ -21,6 +21,10 @@ module.exports = {
           loader: "babel-loader"
         }
       },
+      { //Specific for loading bootstrap styles
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
       {
         test: /\.scss$/,
         use: [
