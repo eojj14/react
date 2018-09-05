@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { Badge } from 'reactstrap';
+import getImage from '../../images/index';
 import classes from './Button.scss';
 
 const Button = (props) => {
@@ -18,8 +19,9 @@ const Button = (props) => {
       target = {target}
     >
       <button
-        className={classes.button}
+        className={classes.container}
         type = 'button'
+        style ={{ backgroundImage: `url(${getImage('dog')})`, backgroundPosition: 'center' }}
       >
         {text}
         <FontAwesomeIcon icon={faCoffee} />

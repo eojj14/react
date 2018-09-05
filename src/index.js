@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import Button from './components/Button';
+import Button from './components/Button/Button';
 
 
 const App = () => [
