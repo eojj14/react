@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classes from './Button.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { Badge } from 'reactstrap';
+import classes from './Button.scss';
 
 const Button = (props) => {
-
-  const { 
+  const {
     href,
     target = '_blank',
-    text
+    text,
   } = props;
 
   return (
@@ -27,8 +26,8 @@ const Button = (props) => {
         <Badge color="secondary">New</Badge>
       </button>
     </a>
-  )
-}
+  );
+};
 
 Button.propTypes = {
   href: PropTypes.string.isRequired,
