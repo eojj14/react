@@ -5,8 +5,8 @@
   "author": "Joseph Johnson",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
-    "start-hot": "webpack-dev-server --mode development --open --hot",
+    "start": "yarn lint && webpack-dev-server --mode development --open",
+    "start-hot": "yarn lint && webpack-dev-server --mode development --open --hot",
     "build": "yarn lint && yarn clean && webpack --mode production",
     "clean": "rimraf dist",
     "lint": "eslint src && sass-lint -c .sasslintrc -v -q"

@@ -2,12 +2,12 @@
 
 .container {
   @extend %rounded;
+  @include box(200px, 150px);
   @include media('<tablet') {
     margin-top: 100px;
   }
   color: $white;
   font-size: 24px;
-  height: 100px;
 }
 
 .icon {
