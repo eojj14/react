@@ -36,9 +36,7 @@ rules:
     - 1
     - allow-leading-underscore: true
       convention: hyphenatedlowercase
-  hex-length:
-    - 1
-    - style: short
+  hex-length: 0
   hex-notation:
     - 1
     - style: lowercase
@@ -59,7 +57,7 @@ rules:
   nesting-depth:
     - 1
     - max-depth: 3
-  no-color-keywords: 1
+  no-color-keywords: 0
   no-color-literals: 1
   no-css-comments: 1
   no-debug: 1

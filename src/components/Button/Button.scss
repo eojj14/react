@@ -1,4 +1,16 @@
+@import '../../styles/base';
+
 .container {
+  @extend %rounded;
+  @include media('<tablet') {
+    margin-top: 100px;
+  }
+  color: $white;
   font-size: 24px;
   height: 100px;
+}
+
+.icon {
+  color: $red;
+  font-size: 32px;
 }
