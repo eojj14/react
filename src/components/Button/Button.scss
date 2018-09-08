@@ -1,16 +1,40 @@
 @import '../../styles/base';
 
 .container {
-  @extend %test;
-  @include test(200px, 150px);
-  @include media('<tablet') {
-    margin-top: 100px;
-  }
-  color: $white;
-  font-size: 24px;
-}
+  @extend %rounded-border;
+  align-items: center;
+  background-color: $dodger-blue;
+  border: 3px solid $blue;
+  display: flex;
+  padding: 10px;
 
-.icon {
-  color: $red;
-  font-size: 32px;
+  .text {
+    color: $white;
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+  }
+
+  .iconRight {
+    color: $white;
+    font-size: $font-size-large;
+    margin-left: 10px;
+  }
+
+  .iconLeft {
+    color: $white;
+    font-size: $font-size-large;
+    margin-right: 10px;
+  }
+
+  &:hover {
+    background-color: $white;
+    transition: background-color .25s ease;
+
+    .text,
+    .iconLeft,
+    .iconRight {
+      color: $dodger-blue;
+    }
+  }
+
 }

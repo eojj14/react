@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-import { Badge } from 'reactstrap';
-import getImage from '../../../images/index';
 import classes from './Button.scss';
 
 const Button = (props) => {
@@ -11,6 +8,8 @@ const Button = (props) => {
     href,
     target,
     text,
+    iconRight,
+    iconLeft,
   } = props;
 
   return (
@@ -19,26 +18,29 @@ const Button = (props) => {
       target={target}
     >
       <button
-        className={classes.container}
         type='button'
-        style={{ backgroundImage: `url(${getImage('dog')})`, backgroundPosition: 'center' }}
+        className={classes.container}
       >
-        {text}
-        <FontAwesomeIcon icon={faCoffee} className={classes.icon} />
-        <Badge color="secondary">New</Badge>
+        {iconLeft && <FontAwesomeIcon icon={iconLeft} className={classes.iconLeft} />}
+        {text && <div className={classes.text}>{text}</div>}
+        {iconRight && <FontAwesomeIcon icon={iconRight} className={classes.iconRight} />}
       </button>
     </a>
   );
 };
 
 Button.defaultProps = {
-  target: '_blank'
+  target: '_blank',
+  iconRight: null,
+  iconLeft: null,
 };
 
 Button.propTypes = {
   href: PropTypes.string.isRequired,
   target: PropTypes.string,
   text: PropTypes.string.isRequired,
+  iconRight: PropTypes.array,
+  iconLeft: PropTypes.array,
 };
 
 export default Button;

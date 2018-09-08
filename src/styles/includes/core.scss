@@ -35,5 +35,5 @@ textarea {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important; //sass-lint:disable-line no-important
 }
