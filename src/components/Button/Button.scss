@@ -1,8 +1,8 @@
 @import '../../styles/base';
 
 .container {
-  @extend %rounded;
-  @include box(200px, 150px);
+  @extend %test;
+  @include test(200px, 150px);
   @include media('<tablet') {
     margin-top: 100px;
   }
