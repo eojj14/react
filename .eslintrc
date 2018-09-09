@@ -5,7 +5,9 @@
   ],
   "rules": {
     "react/jsx-filename-extension": 0,
-    "react/forbid-prop-types": 0
+    "react/forbid-prop-types": 0,
+    "react/no-array-index-key": 0,
+    "no-console": 1
   },
   "extends": [
     "airbnb",

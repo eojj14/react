@@ -25,6 +25,7 @@ $colors: (
   'fuchsia': #ff00ff,
   'purple': #800080,
   'white': #ffffff,
+  'white-smoke': #f5f5f5,
   'snow': #fffafa,
   'beige': #f5f5dc,
   'light-gray': #d3d3d3,
@@ -60,6 +61,7 @@ $violet: map-get($colors, 'violet');
 $fuchsia: map-get($colors, 'fuchsia');
 $purple: map-get($colors, 'purple');
 $white: map-get($colors, 'white');
+$white-smoke: map-get($colors, 'white-smoke');
 $snow: map-get($colors, 'snow');
 $beige: map-get($colors, 'beige');
 $light-gray: map-get($colors, 'light-gray');

@@ -2,20 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import Button from './components/Button/Button';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons'
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
+import List from './components/List/List';
 
-library.add(fab, fas);
+library.add(faFacebook, faPlus, faMinus);
 
 const App = () => [
-  <Button
-    text='Google'
-    href='http://www.google.com'
-    iconRight={['fas', 'arrow-right']}
-    iconLeft={['fas', 'arrow-left']}
+  <List
+    items={[
+      { title: 'Item 1' },
+      { title: 'Item 2' },
+      { title: 'Item 3' }
+    ]}
     key='1'
-  />,
-];
+  />
+]
 
 ReactDOM.render(<App />, document.getElementById('root')); // eslint-disable-line no-undef
