@@ -14,18 +14,17 @@ const Button = (props) => {
   } = props;
 
   const isLink = href && href !== null;
-  const isClick = onClick && onClick !== null;
   const Container = isLink ? 'a' : 'div';
 
   return (
     <Container
       className={classes.container}
-      href={isLink ? href : null}
-      target={isLink ? target : null}
+      href={href}
+      target={target}
     >
       <button
         type='button'
-        onClick={isClick ? onClick : null}
+        onClick={onClick}
       >
         {iconLeft && <FontAwesomeIcon icon={iconLeft} className={classes.iconLeft} />}
         {text && <div className={classes.text}>{text}</div>}

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import classes from './List.scss';
 import Button from '../Button/Button';
 
@@ -15,6 +16,7 @@ class List extends React.Component {
 
     this.handleAdd = this.handleAdd.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleCompleted = this.handleCompleted.bind(this);
   }
 
   handleAdd(item) {
@@ -39,6 +41,18 @@ class List extends React.Component {
     })
   }
 
+  handleCompleted(idx) {
+    const { items } = this.state;
+    let newItems = cloneDeep(items);
+    let newItem = newItems[idx];
+
+    newItem.completed = !newItem.completed;
+
+    this.setState({
+      items: newItems,
+    })
+  }
+
   render() {
     const { items } = this.state;
 
@@ -49,20 +63,38 @@ class List extends React.Component {
             <ul className={classes.list}>
               {items.map((itm, idx) => {
                 return (
-                  <li
-                    className={classes.listItem}
-                    key={`li-${idx}`}
+                  <div
+                    className={classes.listItemGroup}
+                    key={`item-group-${idx}`}
                   >
                     <FontAwesomeIcon
-                      icon={['fas', 'minus']}
-                      key={`fa-${idx}`}
-                      className={classes.addIcon}
+                      icon={['fas', 'times']}
+                      className={classes.deleteIcon}
                       onClick={() => this.handleDelete(idx)}
                     />
-                    {itm.title}
-                  </li>
-                )
-              })}
+                    <button
+                      type='button'
+                      className={classNames(classes.listItem, { [classes.listItemCompleted]: itm.completed})}
+                      key={`list-item-${idx}`}
+                      onClick={() => this.handleCompleted(idx)}
+                    >
+                      {itm.title &&
+                      (
+                        <div className={classes.title}>
+                          {itm.title}
+                          {itm.completed &&
+                            (
+                              <FontAwesomeIcon
+                                icon={['fas', 'check']}
+                                className={classes.completedIcon}
+                              />
+                            )}
+                        </div>
+                      )}
+                      {itm.details && <div className={classes.details}>{itm.details}</div>}
+                    </button>
+                  </div>
+                )})}
             </ul>
           )
         }
@@ -78,7 +110,7 @@ class List extends React.Component {
         <Button
           text='Add Item'
           iconLeft={['fas', 'plus']}
-          onClick={() => this.handleAdd({ title: `Item ${items.length + 1}` })}
+          onClick={() => this.handleAdd({ title: `Item ${items.length + 1}`, completed: false, details: 'Some more details.' })}
           key='1'
         />
       </div>
@@ -93,7 +125,9 @@ List.defaultProps = {
 
 List.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
+    details: PropTypes.string,
   })).isRequired,
 };
 
