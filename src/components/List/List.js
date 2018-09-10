@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
 import classes from './List.scss';
 import Button from '../Button/Button';
+import ListItem from '../ListItem/ListItem';
 
 class List extends React.Component {
   constructor(props) {
@@ -20,7 +19,12 @@ class List extends React.Component {
   }
 
   handleAdd(item) {
-    const { items } = this.state;
+    let { items } = this.state;
+
+    if (!items) {
+      items = [];
+    }
+
     let newItems = cloneDeep(items);
 
     newItems.push(item);
@@ -62,43 +66,23 @@ class List extends React.Component {
           (
             <ul className={classes.list}>
               {items.map((itm, idx) => {
+                const { title, details, completed } = itm;
+
                 return (
-                  <div
-                    className={classes.listItemGroup}
-                    key={`item-group-${idx}`}
-                  >
-                    <FontAwesomeIcon
-                      icon={['fas', 'times']}
-                      className={classes.deleteIcon}
-                      onClick={() => this.handleDelete(idx)}
-                    />
-                    <button
-                      type='button'
-                      className={classNames(classes.listItem, { [classes.listItemCompleted]: itm.completed})}
-                      key={`list-item-${idx}`}
-                      onClick={() => this.handleCompleted(idx)}
-                    >
-                      {itm.title &&
-                      (
-                        <div className={classes.title}>
-                          {itm.title}
-                          {itm.completed &&
-                            (
-                              <FontAwesomeIcon
-                                icon={['fas', 'check']}
-                                className={classes.completedIcon}
-                              />
-                            )}
-                        </div>
-                      )}
-                      {itm.details && <div className={classes.details}>{itm.details}</div>}
-                    </button>
-                  </div>
+                  <ListItem
+                    title={title}
+                    details={details}
+                    completed={completed}
+                    idx={idx}
+                    handleCompleted={this.handleCompleted}
+                    handleDelete={this.handleDelete}
+                    key={`list-item-${idx}`}
+                  />
                 )})}
             </ul>
           )
         }
-        {items && items.length == 0 &&
+        {((items && items.length == 0) || !items) &&
           (
             <div className={classes.noItems}>
               No items. Click
@@ -110,7 +94,7 @@ class List extends React.Component {
         <Button
           text='Add Item'
           iconLeft={['fas', 'plus']}
-          onClick={() => this.handleAdd({ title: `Item ${items.length + 1}`, completed: false, details: 'Some more details.' })}
+          onClick={() => this.handleAdd({ title: `Item ${(items && items.length) ? items.length + 1 : '1'}`, completed: false, details: 'Some more details.' })}
           key='1'
         />
       </div>
@@ -120,15 +104,15 @@ class List extends React.Component {
 }
 
 List.defaultProps = {
-
+  items: null,
 };
 
 List.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    completed: PropTypes.bool.isRequired,
+    title: PropTypes.string,
+    completed: PropTypes.bool,
     details: PropTypes.string,
-  })).isRequired,
+  })),
 };
 
 export default List;
