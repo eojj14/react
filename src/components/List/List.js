@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
 import classes from './List.scss';
-import Button from '../Button/Button';
 import ListItem from '../ListItem/ListItem';
+import Item from '../Item/Item';
 
 class List extends React.Component {
   constructor(props) {
@@ -85,18 +85,16 @@ class List extends React.Component {
         {((items && items.length == 0) || !items) &&
           (
             <div className={classes.noItems}>
-              No items. Click
+              No items were found.
+              <br />
+              Fill out the form below and click
               <b> Add Item </b>
               to add one.
             </div>
           )
         }
-        <Button
-          text='Add Item'
-          iconLeft={['fas', 'plus']}
-          onClick={() => this.handleAdd({ title: `Item ${(items && items.length) ? items.length + 1 : '1'}`, completed: false, details: 'Some more details.' })}
-          key='1'
-        />
+        <hr className={classes.hr} />
+        <Item handleAddClick={this.handleAdd} />
       </div>
     )
   }

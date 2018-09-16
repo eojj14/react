@@ -29,17 +29,32 @@
       margin-right: 10px;
     }
 
-    &:hover {
-      background-color: $white;
-      cursor: pointer;
-      transition: background-color .25s ease;
+  }
 
-      .text,
-      .iconLeft,
-      .iconRight {
-        color: $dodger-blue;
+  &:not(.disabled) {
+    button {
+      &:hover {
+        background-color: $white;
+        cursor: pointer;
+        transition: background-color .25s ease;
+
+        .text,
+        .iconLeft,
+        .iconRight {
+          color: $dodger-blue;
+        }
       }
     }
   }
 
+}
+
+.disabled {
+  opacity: .5;
+
+  button {
+    &:hover {
+      cursor: no-drop;
+    }
+  }
 }

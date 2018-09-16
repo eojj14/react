@@ -6,9 +6,9 @@
 
   .listItem {
     display: flex;
+    flex: 1;
     flex-flow: column;
     padding: 5px;
-    width: 100%;
 
     &:hover {
       cursor: pointer;

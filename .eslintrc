@@ -7,7 +7,9 @@
     "react/jsx-filename-extension": 0,
     "react/forbid-prop-types": 0,
     "react/no-array-index-key": 0,
-    "no-console": 1
+    "no-console": 1,
+    "jsx-a11y/no-autofocus": 0,
+    "jsx-a11y/tabindex-no-positive": 0
   },
   "extends": [
     "airbnb",
