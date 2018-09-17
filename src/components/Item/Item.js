@@ -16,10 +16,14 @@ class Item extends React.Component {
     this.handleCompleted = this.handleCompleted.bind(this);
     this.handleDetails = this.handleDetails.bind(this);
     this.clearInputs = this.clearInputs.bind(this);
-
-    this.titleRef = React.createRef();
     this.focus = this.focus.bind(this);
 
+    this.titleRef = React.createRef();
+
+  }
+
+  componentDidMount() {
+    this.focus();
   }
 
   handleTitle(e) {
@@ -59,8 +63,22 @@ class Item extends React.Component {
   }
 
   isDisabled() {
+    const validation = this.isValid();
+    let retVal = false;
+
+    Object.keys(validation).forEach(e => { if (!validation[e]) retVal = true; });
+
+    return retVal;
+  }
+
+  isValid() {
     const { item } = this.state;
-    return !item || !item.title.trim();
+
+    return {
+      title: item && item.title.trim(),
+      details: item && item.details.trim(),
+      completed: true,
+    }
   }
 
   focus() {
@@ -75,17 +93,19 @@ class Item extends React.Component {
       <div className={classes.container}>
         <div className={classes.headerRow}>
           <input
-            autoFocus
             name='title'
             id='title'
             ref={this.titleRef}
-            className={classNames(classes.title, { [classes.required]: this.isDisabled() })}
+            className={classNames(classes.title, { [classes.required]: !this.isValid().title })}
             type='text'
             placeholder='Title'
             value={item.title}
             onChange={(e) => this.handleTitle(e)}
           />
-          <label htmlFor='completed' className={classes.completed}>
+          <label
+            htmlFor='completed'
+            className={classNames(classes.completed, { [classes.required]: !this.isValid().completed })}
+          >
             <input
               id='completed'
               name='completed'
@@ -99,7 +119,7 @@ class Item extends React.Component {
         </div>
         <div className={classes.detailRow}>
           <textarea
-            className={classes.details}
+            className={classNames(classes.details, { [classes.required]: !this.isValid().details })}
             rows='6'
             placeholder='Details'
             value={item.details}
