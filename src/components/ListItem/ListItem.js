@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
 import classes from './ListItem.scss';
 
 const ListItem = (props) => {
@@ -12,7 +11,8 @@ const ListItem = (props) => {
     details,
     idx,
     handleCompleted,
-    handleDelete
+    handleDelete,
+    showDetail
   } = props;
 
   return (
@@ -27,7 +27,7 @@ const ListItem = (props) => {
       />
       <button
         type='button'
-        className={classNames(classes.listItem, { [classes.listItemCompleted]: completed})}
+        className={classes.listItem}
         key={`list-item-${idx}`}
         onClick={() => handleCompleted(idx)}
       >
@@ -44,7 +44,7 @@ const ListItem = (props) => {
               )}
           </div>
         )}
-        {details && <div className={classes.details}>{details}</div>}
+        {details && showDetail && <div className={classes.details}>{details}</div>}
       </button>
     </div>
   )
@@ -57,6 +57,7 @@ ListItem.defaultProps = {
   idx: null,
   handleDelete: null,
   handleCompleted: null,
+  showDetail: false,
 };
 
 ListItem.propTypes = {
@@ -66,6 +67,7 @@ ListItem.propTypes = {
   idx: PropTypes.number,
   handleDelete: PropTypes.func,
   handleCompleted: PropTypes.func,
+  showDetail: PropTypes.bool,
 };
 
 export default ListItem;

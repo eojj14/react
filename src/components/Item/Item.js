@@ -76,7 +76,7 @@ class Item extends React.Component {
 
     return {
       title: item && item.title.trim(),
-      details: item && item.details.trim(),
+      details: true,
       completed: true,
     }
   }
