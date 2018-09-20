@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import localStorage from 'local-storage';
 import classes from './List.scss';
 import ListItem from '../ListItem/ListItem';
 import Item from '../Item/Item';
@@ -10,10 +11,12 @@ class List extends React.Component {
   constructor(props) {
     super(props);
 
+    const { items, showDetail, showCompleted } = this.props;
+
     this.state = {
-      items: props.items,
-      showDetail: true,
-      showCompleted: true,
+      items: items,
+      showDetail: showDetail,
+      showCompleted: showCompleted,
     }
 
     this.handleAdd = this.handleAdd.bind(this);
@@ -21,6 +24,32 @@ class List extends React.Component {
     this.handleCompleted = this.handleCompleted.bind(this);
     this.handleShowDetail = this.handleShowDetail.bind(this);
     this.handleShowCompleted = this.handleShowCompleted.bind(this);
+  }
+
+  componentWillMount() {
+    this.handleLoad();
+  }
+
+  componentDidUpdate() {
+    this.handleSave();
+  }
+
+  handleSave() {
+    for (let key in this.state) {
+      localStorage.set(key, JSON.stringify(this.state[key])); // eslint-disable-line react/destructuring-assignment
+    }
+  }
+
+  handleLoad() {
+    let newState = {};
+    for (let key in this.state) {
+      const value = JSON.parse(localStorage.get(key));
+      if (value !== null) {
+        newState[key] = value;
+      }
+    }
+
+    this.setState(newState);
   }
 
   handleAdd(item) {
@@ -147,10 +176,14 @@ class List extends React.Component {
 }
 
 List.defaultProps = {
-  items: null,
+  showDetail: true,
+  showCompleted: true,
+  items: [],
 };
 
 List.propTypes = {
+  showDetail: PropTypes.bool,
+  showCompleted: PropTypes.bool,
   items: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
     completed: PropTypes.bool,
