@@ -2,7 +2,17 @@
 
 .listItemGroup {
   align-items: center;
+  background-color: $white-smoke;
   display: flex;
+  padding: 5px;
+
+  &:first-of-type {
+    border-top: 3px solid $blue;
+  }
+
+  &:last-of-type {
+    margin: 0 0 -10px;
+  }
 
   .listItem {
     display: flex;
