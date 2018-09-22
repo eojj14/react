@@ -1,6 +1,6 @@
 @import '../../styles/base';
 
-.listItemGroup {
+.container {
   align-items: center;
   background-color: $white-smoke;
   display: flex;
@@ -57,6 +57,6 @@
 
 }
 
-.listItemGroup + .listItemGroup {
+.container + .container {
   border-top: 1px solid $silver;
 }

@@ -17,7 +17,7 @@ const ListItem = (props) => {
 
   return (
     <div
-      className={classes.listItemGroup}
+      className={classes.container}
       key={`list-item-group-${idx}`}
     >
       <FontAwesomeIcon
