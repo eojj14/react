@@ -166,7 +166,7 @@ class List extends React.Component {
             </ul>
           )
         }
-        {((items && items.length == 0) || !items) &&
+        {((items && items.length === 0) || !items) &&
           (
             <div className={classes.noItems}>
               No items were found.
