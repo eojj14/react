@@ -6,14 +6,6 @@
   display: flex;
   padding: 5px;
 
-  &:first-of-type {
-    border-top: 3px solid $blue;
-  }
-
-  &:last-of-type {
-    margin: 0 0 -10px;
-  }
-
   .listItem {
     display: flex;
     flex: 1;
@@ -55,8 +47,4 @@
     }
   }
 
-}
-
-.container + .container {
-  border-top: 1px solid $silver;
 }

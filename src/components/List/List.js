@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, filter } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import localStorage from 'local-storage';
+import classNames from 'classnames';
 import classes from './List.scss';
 import ListItem from '../ListItem/ListItem';
 import Item from '../Item/Item';
@@ -32,6 +33,16 @@ class List extends React.Component {
 
   componentDidUpdate() {
     this.handleSave();
+  }
+
+  getCompleteItems() {
+    const { items } = this.state;
+    return filter(items, { completed: true });
+  }
+
+  getIncompleteItems() {
+    const { items } = this.state;
+    return filter(items, { completed: false });
   }
 
   handleSave() {
@@ -109,37 +120,36 @@ class List extends React.Component {
 
   render() {
     const { items, showDetail, showCompleted } = this.state;
+    const completeItems = this.getCompleteItems();
 
     return (
-      [
-        items && items.length > 0 &&
+      <div className={classes.container}>
+        {items && items.length > 0 &&
           (
-          <FontAwesomeIcon
-            key='showDetailIcon'
-            onClick={this.handleShowDetail}
-            icon={showDetail ? ['fas', 'caret-down'] : ['fas', 'caret-right']}
-            className={classes.listIconDetail}
-          />
-        ),
-        items && items.length > 0 &&
-          (
-          <FontAwesomeIcon
-            key='showCompletedIcon'
-            onClick={this.handleShowCompleted}
-            icon={showCompleted ? ['fas', 'check'] : ['fas', 'times']}
-            className={classes.listIconCompleted}
-          />
-        ),
-        <div className={classes.container} key='List'>
-          {items && items.length > 0 &&
-            (
-              <ul className={classes.list}>
-                {items.map((itm, idx) => {
-                  const { title, details, completed } = itm;
+            <ul className={classes.list} key='ListItem'>
+              <div className={classNames(classes.headerRow, { [classes.headerRowAllCompleted]: completeItems.length === items.length && !showCompleted })}>
+                <div className={classes.itemCount}>
+                  {`Completed: ${completeItems.length}/${items.length}
+                  ${!showCompleted && completeItems.length > 0 ? ' (' + completeItems.length + ' Hidden)' : ''}` }
+                </div>
+                <FontAwesomeIcon
+                  onClick={this.handleShowDetail}
+                  icon={showDetail ? ['fas', 'caret-down'] : ['fas', 'caret-right']}
+                  className={classes.iconDetail}
+                />
+                <FontAwesomeIcon
+                  onClick={this.handleShowCompleted}
+                  icon={showCompleted ? ['fas', 'check'] : ['fas', 'times']}
+                  className={classes.iconCompleted}
+                />
+              </div>
+              {items.map((itm, idx) => {
+                const { title, details, completed } = itm;
 
-                  return (
-                    (!showCompleted && !completed || showCompleted) &&
-                    (
+                return (
+                  (!showCompleted && !completed || showCompleted) &&
+                  (
+                    <div className={classes.detailRow}>
                       <ListItem
                         title={title}
                         details={details}
@@ -150,26 +160,26 @@ class List extends React.Component {
                         showDetail={showDetail}
                         key={`list-item-${idx}`}
                       />
-                    )
-                  )})}
-              </ul>
-            )
-          }
-          {((items && items.length == 0) || !items) &&
-            (
-              <div className={classes.noItems}>
-                No items were found.
-                <br />
-                Fill out the form below and click
-                <b> Add Item </b>
-                to add one.
-              </div>
-            )
-          }
-          <hr className={classes.hr} />
-          <Item handleAddClick={this.handleAdd} />
-        </div>
-      ]
+                    </div>
+                  )
+                )})}
+            </ul>
+          )
+        }
+        {((items && items.length == 0) || !items) &&
+          (
+            <div className={classes.noItems}>
+              No items were found.
+              <br />
+              Fill out the form below and click
+              <b> Add Item </b>
+              to add one.
+            </div>
+          )
+        }
+        <hr className={classes.hr} />
+        <Item handleAddClick={this.handleAdd} />
+      </div>
     )
   }
 
