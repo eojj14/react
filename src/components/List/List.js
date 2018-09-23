@@ -126,7 +126,7 @@ class List extends React.Component {
       <div className={classes.container}>
         {items && items.length > 0 &&
           (
-            <ul className={classes.list} key='ListItem'>
+            <ul className={classes.list}>
               <div className={classNames(classes.headerRow, { [classes.headerRowAllCompleted]: completeItems.length === items.length && !showCompleted })}>
                 <div className={classes.itemCount}>
                   {`Completed: ${completeItems.length}/${items.length}
@@ -149,7 +149,7 @@ class List extends React.Component {
                 return (
                   (!showCompleted && !completed || showCompleted) &&
                   (
-                    <div className={classes.detailRow}>
+                    <div className={classes.detailRow} key={`detail-row-${idx}`}>
                       <ListItem
                         title={title}
                         details={details}
