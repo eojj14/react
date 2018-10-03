@@ -126,13 +126,15 @@ class Item extends React.Component {
             onChange={(e) => this.handleDetails(e)}
           />
         </div>
-        <Button
-          tabIndex={0}
-          text='Add Item'
-          iconLeft={['fas', 'plus']}
-          disabled={this.isDisabled()}
-          onClick={() => { handleAddClick(item); this.clearInputs(); this.focus(); }}
-        />
+        <div className={classes.buttons}>
+          <Button
+            tabIndex={0}
+            text='Add Item'
+            iconLeft={['fas', 'plus']}
+            disabled={this.isDisabled()}
+            onClick={() => { handleAddClick(item); this.clearInputs(); this.focus(); }}
+          />
+        </div>
       </div>
     )
   }
